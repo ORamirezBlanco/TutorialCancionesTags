@@ -18,7 +18,7 @@ class Ventana_Album(QWidget):
         self.title = 'Mi música - album'
         self.left = 80
         self.top = 80
-        self.width = 550
+        self.width = 555
         self.height = 650
         #Inicializamos la ventana principal
         self.inicializar_ventana()
