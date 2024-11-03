@@ -95,48 +95,6 @@ class Ventana_Lista_Canciones(QWidget):
             if child.widget():
                 child.widget().deleteLater()
             self.caja_canciones.layout().setRowStretch(0,0)
-
-
-    def mostrar_canciones_oscar(self, canciones):
-        '''
-        Método para mostrar la información de las canciones
-        '''
-        self.limpiar_canciones()
-        self.botones = []
-        fila = 1
-        for cancion in canciones:
-            texto_titulo = QLineEdit(cancion["titulo"])
-            texto_titulo.setReadOnly(True)
-            self.caja_canciones.layout().addWidget(texto_titulo,fila,0, QtCore.Qt.AlignTop | QtCore.Qt.AlignCenter)
-
-            texto_interpretes = QLineEdit(cancion.get("compositor",cancion["compositor"]))
-            texto_interpretes.setReadOnly(True)
-            self.caja_canciones.layout().addWidget(texto_interpretes,fila,1, QtCore.Qt.AlignTop | QtCore.Qt.AlignCenter)
-            
-            texto_duracion = QLineEdit("{}:{}".format(cancion["minutos"],cancion["segundos"]))
-            texto_duracion.setReadOnly(True)
-            self.caja_canciones.layout().addWidget(texto_duracion,fila,2, QtCore.Qt.AlignTop | QtCore.Qt.AlignCenter)
-            
-            boton_ver = QPushButton("Ver")
-            boton_ver.setFixedSize(50, 25)
-            boton_ver.clicked.connect(lambda estado, x=cancion["id"]: self.ver_cancion(x))
-
-            boton_borrar = QPushButton("Borrar")
-            boton_borrar.setFixedSize(50, 25)
-            boton_borrar.clicked.connect(lambda estado, x=cancion["id"]: self.eliminar_cancion(x))
-
-            widget_botones = QWidget()
-            widget_botones.setLayout(QGridLayout())
-            widget_botones.setFixedWidth(110)
-        
-            widget_botones.layout().addWidget(boton_ver,0,0)
-            widget_botones.layout().addWidget(boton_borrar,0,1)
-            widget_botones.layout().setContentsMargins(0,0,0,0)
-
-            self.caja_canciones.layout().addWidget(widget_botones, fila,3, QtCore.Qt.AlignTop | QtCore.Qt.AlignCenter)
-            fila+=1
-        #Esta instrucción permite compactar los resultados
-        self.caja_canciones.layout().setRowStretch(fila+1, 1)
         
     def mostrar_canciones(self, canciones):
         '''
