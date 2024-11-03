@@ -24,6 +24,11 @@ jobs:
       - name: Correr pruebas
         id: correr-pruebas
         run: python -m unittest discover -s tests
+      - name: pruebas+coverage
+        id: pruebas
+        run: |
+          python -m coverage run -m unittest discover tests 
+          python -m coverage xml -i
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
